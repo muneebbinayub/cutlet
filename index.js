@@ -2,6 +2,8 @@ import express from 'express';
 import router from './api/routes/routes.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{
@@ -13,12 +15,15 @@ mongoose.connect(process.env.MONGO).then(()=>{
 // create express app
 const app = express();
 
+app.use(express.json());
+app.use(cookieParser());
+
 const port = 200;
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, token');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
   
     next();

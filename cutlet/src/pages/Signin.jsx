@@ -23,15 +23,18 @@ export const Signin = () => {
         "Content-Type":"application/json",
       },
       body:JSON.stringify(formData)
-    }).then((reso)=>{
+    }).then(async(reso)=>{
+      const data = await reso.json();
       if(reso.status===200)
       {
         setInvalidError("");
-        setIsValid("User is valid");
+        setIsValid(data.message);
+        localStorage.setItem("token",data.message)
+        console.log("muneeb",localStorage.getItem("token"));
       }
       else if(reso.status===404){
         setIsValid("");
-        setInvalidError("user invalid");
+        setInvalidError(data.message);
       }
     }).catch((err)=>{
       setIsValid("");
