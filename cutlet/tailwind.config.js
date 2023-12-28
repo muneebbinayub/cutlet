@@ -11,7 +11,7 @@ export default {
         secoudary:'#181020',
         myYellow:'#ffc506d3',
         myWhite:'#ffffffc7'
-      }
+      },
     },
     screens: {
       sm: '330px',
